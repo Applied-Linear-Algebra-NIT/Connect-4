@@ -41,12 +41,12 @@ def game():
         while True:
             try:
                 col = int(
-                    input("Enter a column (0-{}): ".format(BOARD_SIZE - 1)))
+                    input("Enter a column (1-{}): ".format(BOARD_SIZE))) - 1
                 if 0 <= col < BOARD_SIZE:
                     break
             except ValueError:
                 pass
-        for row in range(BOARD_SIZE - 1, -1, -1):
+        for row in range(BOARD_SIZE-1, -1, -1):
             if board[row, col] == 0:
                 board[row, col] = player
                 if checkForWin(player):
