@@ -153,13 +153,30 @@ def check_if_player_won(board, icon):
                 return True
     return False
 
+
+def reset_board(board, empty):
+    for i in range(len(board)):
+        for j in range(len(board[0])):
+            board[i][j] = empty
+
+def reset_board_when_full(board):
+    #check for empty space
+    global empty
+    for i in board:
+        for j in i:
+            if j == empty:
+                return
+
+    #whipe the board if no empty found
+    reset_board(board, empty)
+    
 def game(player_icon, board):
     turn = 0
     while True:
         draw(board)
         if check_if_player_won(board,player_icon[turn]):
             return turn
-
+        reset_board_when_full(board)
         #swap the turn
         turn=0 if turn else 1
         
@@ -168,4 +185,18 @@ def game(player_icon, board):
             move = get_player_move(player_icon[turn], board_x)
             allGood = action(move, player_icon[turn], board, board_x)
 
-print(game(player_icon, board))
+
+def loop():
+    os.system('cls' if os.name=='nt' else 'clear')
+    while True:
+        reset_board(board, empty)
+        game(player_icon, board)
+        usr_input = input("play again? ")
+        if usr_input.lower() in ['1', 'yes', 'y']:
+            
+            continue
+        else:
+            print("Thanks for playing! have a good day.")
+            break
+
+loop()
