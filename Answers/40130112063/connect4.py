@@ -79,7 +79,7 @@ def is_board_full(board):
 def game():
 
     board = create_board()
-    current_player = 1  # Player 1 starts
+    current_player = 1  
 
     while True:
         print_board(board)
@@ -87,7 +87,7 @@ def game():
         while True:
             try:
                 col = int(input(f"Player {current_player}, choose a number between 1 to 5: ")) - 1
-                if 0 <= col < cols and (board, col):
+                if 0 <= col < cols and is_column_free(board, col):
                     break
                 else:
                     print("Invalid number. Try again.")
