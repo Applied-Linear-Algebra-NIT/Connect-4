@@ -22,6 +22,8 @@ def is_location_valid(board, row, col):
 
 def winning_move(board, player, flag):
     check = 0
+
+    # horizontally
     for r in range(row_count):
         for c in range(col_count):
             if board[r][c] == player:
@@ -33,9 +35,10 @@ def winning_move(board, player, flag):
         else:
             check = 0
 
+    # vertically
     for c in range(col_count):
         for r in range(row_count):
-            if board[c][r] == player:
+            if board[r][c] == player:
                 check += 1
         if check == 5:
             print(f'Player{player} has won')
@@ -54,11 +57,14 @@ def winning_move(board, player, flag):
 
     return flag
 
-def game_over(board):
-    return
+def available_row(board, col):
+    for r in range(row_count):
+        if board[r][col] == 0:
+            return r
+
 def player1(board):
-    row = int(input("Pick your row from 0-4 : "))
-    col = int(input("Pick your column from 0-4 : "))
+    col = int(input("Player1 pick your column from 0-4 : "))
+    row = available_row(board, col)
 
     if is_location_valid(board, row, col):
         add_to_board(board, row, col, 1)
@@ -66,8 +72,8 @@ def player1(board):
         player1(board)
 
 def player2(board):
-    row = int(input("Pick your row from 0-4 : "))
-    col = int(input("Pick your column from 0-4 : "))
+    col = int(input("Player2 pick your column from 0-4 : "))
+    row = available_row(board, col)
 
     if is_location_valid(board, row, col):
         add_to_board(board, row, col, 2)
