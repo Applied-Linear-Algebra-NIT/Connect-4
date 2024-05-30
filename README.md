@@ -1,3 +1,5 @@
+Developer's Note: requires .Net framework version 8.0
+
 # Connect 4
 
 In this assignment, we delve into implementing a charming and straightforward game called "Connect 4" using numpy arrays.
